@@ -585,7 +585,7 @@ namespace eRecruit.Pages
                             EmailDisplayTemplate(list[(j + 7)].ToString());
                             BaseMethods.TinyMCEEditor(driver, eleIframeEmailBody, list[(j + 8)].ToString());
                             eleBtnEmailAttachment.Click();
-                            BaseMethods.AutoItUpload(list[(j + 9)].ToString());
+                            BaseMethods.AutoItUpload(driver, list[(j + 9)].ToString());
                             Preview();
                             Send();
                         }

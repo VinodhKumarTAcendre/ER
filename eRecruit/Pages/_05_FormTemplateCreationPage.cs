@@ -19,11 +19,12 @@ namespace eRecruit.Pages
 {
     public class _05_FormTemplateCreationPage
     {
+        static IWebDriver driver;
         public _05_FormTemplateCreationPage(IWebDriver _driver)
         {
             PageFactory.InitElements(_driver, this);
+            driver = _driver;
         }
-
 
         [FindsBy(How = How.Name, Using = "FormTypeID")]
         private IWebElement eleddlFormTypeID { get; set; }
@@ -35,8 +36,6 @@ namespace eRecruit.Pages
         {
             return eleddlFormTypeID;
         }
-
-
 
         [FindsBy(How = How.LinkText, Using = "Form List")]
         private IWebElement eleLinkFormList { get; set; }
@@ -125,17 +124,8 @@ namespace eRecruit.Pages
             return eleStepDescription;
         }
 
-        [FindsBy(How = How.Id, Using = "labelWidthType1")]
-        private IWebElement eleradioSystemDefault { get; set; }
-
-        public void SystemDefaultQuestionLabelWidth()
-        {
-            eleradioSystemDefault.Click();
-        }
-
         [FindsBy(How = How.Id, Using = "labelWidthType2")]
         private IWebElement eleradioCustomPixel { get; set; }
-
         public void CustomPixelQuestionLabelWidth()
         {
             eleradioCustomPixel.Click();
@@ -144,22 +134,21 @@ namespace eRecruit.Pages
 
         [FindsBy(How = How.Id, Using = "labelWidthType3")]
         private IWebElement eleradioCustomPercentage { get; set; }
-
         public void CustomPercentageQuestionLabelWidth()
         {
             eleradioCustomPercentage.Click();
             BaseMethods.InfoLogger("Question Label Width : Custom Percentage");
         }
 
-        [FindsBy(How = How.Name, Using = "btnSubmit")]
-        private IWebElement elebtnsave { get; set; }
-
+        [FindsBy(How = How.XPath, Using = "//input[@name='btnSubmit']")]
+        private IWebElement eleBtnSaveStep { get; set; }
         /// <summary>
         /// Save Form Step
         /// </summary>
-        public void SaveStepdetails()
+        public void SaveStepDetails()
         {
-            elebtnsave.Click();
+            BaseMethods.ScrollToView(driver, eleBtnSaveStep);
+            eleBtnSaveStep.Click();
             BaseMethods.InfoLogger("Clicked on Save Button");
         }
 
@@ -248,33 +237,6 @@ namespace eRecruit.Pages
             return list;
         }
 
-        #region Code not in use
-
-        /// <summary>
-        /// Create Single Step for Form Template
-        /// </summary>
-        /// <param name="_driver">IWebDriver</param>
-        /// <param name="_StepTitle">Step Title</param>
-        /// <param name="_StepDescription">Step Description</param>
-        /// <param name="_LableWidth">Question Label Width</param>
-        //public void CreateSingleStep(IWebDriver _driver, string _StepTitle, string _StepDescription, string _LableWidth)
-        //{
-        //    AddNewFormStep();
-        //    StepTitle(_StepTitle);
-        //    BaseMethods.TinyMCEEditor(_driver, StepDescription(), _StepDescription);
-        //    BaseMethods.PageScrollDown(_driver);
-        //    QuestionLabelWidth(_driver, _LableWidth);
-        //    SaveStepdetails();
-        //    Logger.log.Info("Step has been added to Form Template");
-        //    ExtentReport.test.Log(LogStatus.Pass, "Step has been added to Form Template");
-        //}
-
-        #endregion
-
-        /// <summary>
-        /// Create Multiple Steps for Form Template
-        /// </summary>
-        /// <param name="_driver">IWebDriver</param>
         public void CreateMultipleSteps(IWebDriver _driver, string ConfigKey, string Sheet, string ConditionKey)
         {
             ArrayList list = null;
@@ -298,7 +260,7 @@ namespace eRecruit.Pages
                     BaseMethods.TinyMCEEditor(_driver, StepDescription(), list[j + 1].ToString());
                     BaseMethods.PageScrollDown(_driver);
                     QuestionLabelWidth(_driver, list[j + 2].ToString());
-                    SaveStepdetails();
+                    SaveStepDetails();
                     BaseMethods.InfoLogger("Step has been added successfully");
                     j = j + 4;
                 }
@@ -327,7 +289,7 @@ namespace eRecruit.Pages
                 Actions action = new Actions(_driver);
                 action.ClickAndHold(eleSlide);
                 action.MoveByOffset(50, 50).Build().Perform();
-                action.Release();
+                action.Release().Perform();
             }
             else if (Value == "Custom Percentage Width")
             {
@@ -337,7 +299,7 @@ namespace eRecruit.Pages
                 Actions action = new Actions(_driver);
                 action.ClickAndHold(eleSlide);
                 action.MoveByOffset(50, 50).Build().Perform();
-                action.Release();
+                action.Release().Perform();
             }
             else
             {
@@ -462,7 +424,7 @@ namespace eRecruit.Pages
                 BaseMethods.TinyMCEEditor(_driver, StepDescription(), "Entered Step Description");
                 BaseMethods.PageScrollDown(_driver);
                 QuestionLabelWidth(_driver, "System Default");
-                SaveStepdetails();
+                SaveStepDetails();
                 BaseMethods.InfoLogger("Clicked on Save button - After Edit");
                 string Edit_ExpectedSucessMsg = "×\r\n>   Form Section configuration updated.   ";
                 string Edit_ActualSucessMsg = GetAlertMessage();

@@ -85,7 +85,7 @@ namespace eRecruit.Pages
         [FindsBy(How = How.Id, Using = "EmailContent_ifr")]
         private IWebElement eleIframeEmailBody { get; set; }
 
-        [FindsBy(How = How.Id, Using = "EmailAttachment")]
+        [FindsBy(How = How.Name, Using = "EmailAttachment")]
         private IWebElement eleBrowseEmailAttachment { get; set; }
         public void EmailAttachmentButton()
         {
@@ -154,7 +154,7 @@ namespace eRecruit.Pages
                 BaseMethods.TinyMCEEditor(driver, eleIframeEmailBody, list[(j + 6)].ToString());
                 BaseMethods.PageScrollDown(driver);
                 EmailAttachmentButton();
-                BaseMethods.AutoItUpload(list[(j + 7)].ToString());
+                BaseMethods.AutoItUpload(driver, list[(j + 7)].ToString());
                 BaseMethods.ExplicitWait(driver, "//div[@id='uploadingListDiv']/div/a");
                 SaveAndReview();
                 string ExpectedValue = "×\r\n>   Email configuration updated.   ";

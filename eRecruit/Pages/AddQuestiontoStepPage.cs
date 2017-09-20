@@ -52,18 +52,14 @@ namespace eRecruit.Pages
             }
         }
 
-
         [FindsBy(How = How.Id, Using = "ComponentTypeID")]
         private IWebElement eleddlQuestionType { get; set; }
-
 
         [FindsBy(How = How.Id, Using = "AnswerFormat")]
         private IWebElement eleddlAnswerformat { get; set; }
 
-
         [FindsBy(How = How.Id, Using = "DataType")]
         private IWebElement eleddldatatype { get; set; }
-
 
         [FindsBy(How = How.Id, Using = "MaxLength")]
         private IWebElement eletxtMaxLength { get; set; }
@@ -86,7 +82,6 @@ namespace eRecruit.Pages
 
         [FindsBy(How = How.Name, Using = "btn_Save")]
         private IWebElement elebtnSave { get; set; }
-
         public void Save()
         {
             elebtnSave.Click();

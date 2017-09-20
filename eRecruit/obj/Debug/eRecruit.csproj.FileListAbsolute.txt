@@ -21,7 +21,6 @@ C:\Users\vinodh.kumar\Source\Repos\eRecruit\eRecruit\bin\Debug\log4net.xml
 C:\Users\vinodh.kumar\Source\Repos\eRecruit\eRecruit\bin\Debug\nunit.framework.xml
 C:\Users\vinodh.kumar\Source\Repos\eRecruit\eRecruit\bin\Debug\WebDriver.xml
 C:\Users\vinodh.kumar\Source\Repos\eRecruit\eRecruit\bin\Debug\WebDriver.Support.xml
-C:\Users\vinodh.kumar\Source\Repos\eRecruit\eRecruit\obj\Debug\eRecruit.csprojResolveAssemblyReference.cache
 C:\Users\vinodh.kumar\Source\Repos\eRecruit\eRecruit\obj\Debug\Interop.AutoItX3Lib.dll
 C:\Users\vinodh.kumar\Source\Repos\eRecruit\eRecruit\obj\Debug\eRecruit.csproj.ResolveComReference.cache
 C:\Users\vinodh.kumar\Source\Repos\eRecruit\eRecruit\obj\Debug\eRecruit.dll

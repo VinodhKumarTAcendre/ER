@@ -28,24 +28,28 @@ namespace eRecruit.Tests
             {
                 Logger.log.Info(" Launching Internet Explorer Browser");
                 driver.Url = _url;
+                driver.Manage().Window.Maximize();
                 driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(wait);
             }
             else if (_name[2] == "Firefox")
             {
                 Logger.log.Info(" Launching Firefox Browser");
                 driver.Navigate().GoToUrl(_url);
+                driver.Manage().Window.Maximize();
                 driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(wait);
             }
             else if (_name[2] == "Chrome")
             {
                 Logger.log.Info(" Launching Chrome Browser");
                 driver.Navigate().GoToUrl(_url);
+                driver.Manage().Window.Maximize();
                 driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(wait);
             }
             else if (_name[2] == "Edge")
             {
                 Logger.log.Info(" Launching Microsoft Edge Browser");
                 driver.Navigate().GoToUrl(_url);
+                driver.Manage().Window.Maximize();
                 driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(wait);
                 driver.Navigate().GoToUrl("javascript:document.getElementById('overridelink').click()");
             }

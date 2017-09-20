@@ -58,7 +58,7 @@ namespace eRecruit.Pages
                 BaseMethods.TinyMCEEditor(_driver, Ftc.StepDescription(), "Entered Step Description");
                 BaseMethods.PageScrollDown(_driver);
                 Ftc.QuestionLabelWidth(_driver, "System Default");
-                Ftc.SaveStepdetails();
+                Ftc.SaveStepDetails();
                 BaseMethods.InfoLogger("Clicked on Save button - After Edit");
                 string Edit_ExpectedSucessMsg = "×\r\n>   Form Section configuration updated.   ";
                 string Edit_ActualSucessMsg = GetAlertMessage();

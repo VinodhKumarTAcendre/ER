@@ -173,8 +173,9 @@ namespace eRecruit.Library
         /// <param name="Value">Value to be entered</param>
         public static void TinyMCEEditor(IWebDriver _driver, IWebElement element, string Value)
         {
-            string _BrowserType = ConfigurationManager.AppSettings["Browser"];
-            if (_BrowserType == "IE")
+            string _BrowserName = _driver.GetType().FullName;
+            string[] _name = _BrowserName.Split('.');
+            if (_name[2] == "IE" || _name[2] == "Edge")
             {
                 _driver.FindElement(By.XPath("(//button[@role='presentation'])[14]")).Click();
             }
@@ -483,7 +484,7 @@ namespace eRecruit.Library
         /// </summary>
         /// <param name="FileName">File Name</param>
         /// <Pre Requisire>AutoIt must be installed in the current system </Pre>
-        public static void AutoItUpload(string FileName)
+        public static void AutoItUpload(IWebDriver driver, string FileName)
         {
             string _path = System.Reflection.Assembly.GetCallingAssembly().CodeBase;
             string _actualPath = _path.Substring(0, _path.LastIndexOf("bin"));
@@ -491,9 +492,33 @@ namespace eRecruit.Library
             string _UploadFolderPath = _projectPath + "Library\\UploadFiles\\";
             string fName = _UploadFolderPath + FileName;
 
-            AutoIt.AutoItX.ControlFocus("File Upload", "", "Edit1");
-            AutoIt.AutoItX.ControlSetText("File Upload", "", "Edit1", fName);
-            AutoIt.AutoItX.ControlClick("File Upload", "", "Button1");
+            string _BrowserName = driver.GetType().FullName;
+            string[] _name = _BrowserName.Split('.');
+            string _FileUploadHeader = string.Empty;
+            if (_name[2] == "IE")
+            {
+                _FileUploadHeader = "Choose File to Upload";
+            }
+            else if (_name[2] == "Firefox")
+            {
+                _FileUploadHeader = "File Upload";
+            }
+            else if (_name[2] == "Chrome")
+            {
+                _FileUploadHeader = "Open";
+            }
+            else if (_name[2] == "Edge")
+            {
+                _FileUploadHeader = "Open";
+            }
+            else
+            {
+                BaseMethods.InfoLogger("Invlaid Data Provided. Swithing to Default Data");
+                _FileUploadHeader = "File Upload";
+            }
+            AutoIt.AutoItX.ControlFocus(_FileUploadHeader, "", "Edit1");
+            AutoIt.AutoItX.ControlSetText(_FileUploadHeader, "", "Edit1", fName);
+            AutoIt.AutoItX.ControlClick(_FileUploadHeader, "", "Button1");
         }
     }
 }

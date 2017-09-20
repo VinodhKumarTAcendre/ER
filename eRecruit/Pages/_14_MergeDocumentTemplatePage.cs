@@ -98,7 +98,7 @@ namespace eRecruit.Pages
                 BaseMethods.InfoLogger("Merge Document Template Creation Started");
                 TxtMergeDocumentName(list[j].ToString());
                 UploadMergeDocumentFile();
-                BaseMethods.AutoItUpload(list[(j+1)].ToString());
+                BaseMethods.AutoItUpload(driver, list[(j+1)].ToString());
                 Save();
                 if (eleChkErrorDisplay.Displayed)
                 {
